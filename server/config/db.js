@@ -1,3 +1,4 @@
+// server/config/db.js
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
@@ -7,8 +8,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT,          // Додано порт
-    dialect: 'postgres',                // Заміна mysql на postgres
+    dialect: 'mysql',
     logging: false,
   }
 );
