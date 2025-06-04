@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+
 require('dotenv').config();
 
 const sequelize = require('./config/db');  // Ось так імпортуємо
@@ -7,6 +8,7 @@ const sequelize = require('./config/db');  // Ось так імпортуємо
 const authRoutes  = require('./routes/authRoutes');
 const taskRoutes  = require('./routes/taskRoutes');
 const userRoutes  = require('./routes/userRoutes');
+const { Task } = require('./models');
 const adminRoutes = require('./routes/admin');
 
 
@@ -29,4 +31,9 @@ const PORT = process.env.PORT || 5000;
   } catch (err) {
     console.error('Не вдалося запустити сервер:', err);
   }
+})();
+
+(async () => {
+  const tasks = await Task.findAll({ limit: 10 });
+  console.log(tasks.map(t => t.toJSON()));
 })();
